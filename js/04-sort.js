@@ -1,0 +1,78 @@
+/*
+ * Метод toSorted
+ *
+ * - Свій порядок сортування чисел
+ * - Свій порядок сортування рядків
+ * - Сортування об'єктів
+ *
+ * За замовчуванням:
+ * - сортує за зростанням
+ * - приводить елементи до рядка і сортує за [Unicode](https://symbl.cc/en/unicode-table/)
+ */
+// const numbers = [1, 9, 6, 2, 3];
+// const sortedNumbers = numbers.toSorted();
+
+// console.log('numbers =', numbers);
+// console.log('sortedNumbers =', sortedNumbers);
+
+// const letters = ['b', 'd', 'a', 'c'];
+// const sortedLetters = letters.toSorted();
+
+// console.log('letters =', letters);
+// console.log('sortedLetters =', sortedLetters);
+
+/*
+ * compareFunction - функція порівняння (callback)
+ * Елементи масиву сортуються відповідно до її значення, що повертається
+ */
+// const numbers = [1, 6, 2, 3, 9, 10, 22, 34];
+// const sortedNumbers = numbers.toSorted((prevEl, nextEl) => {
+//   return prevEl - nextEl;
+// });
+
+// console.log('numbers =', numbers);
+// console.log('sortedNumbers =', sortedNumbers);
+
+// const letters = ['b', 'd', 'a', 'c', 'Y', 'I'];
+// const sortedLetters = letters.toSorted((prevEl, nextEl) => {
+//   return prevEl.localeCompare(nextEl);
+// });
+
+// console.log('letters =', letters);
+// console.log('sortedLetters =', sortedLetters);
+
+// console.log('a'.localeCompare('b'));
+// console.log('b'.localeCompare('a'));
+// console.log('a'.localeCompare('a'));
+
+/*
+ * Сортування масиву об'єктів
+ */
+// const players = [
+//   { id: 'player-1', name: 'Poly', timePlayed: 310, online: false },
+//   { id: 'player-2', name: 'Mango', timePlayed: 470, online: true },
+//   { id: 'player-4', name: 'Ajax', timePlayed: 150, online: false },
+//   { id: 'player-5', name: 'Chelsey', timePlayed: 80, online: true },
+// ];
+
+// console.table(players);
+
+// TODO: За ігровим часом
+// const sortedByBestPlayers = players.toSorted((prevEl, nextEl) => {
+//   return nextEl.timePlayed - prevEl.timePlayed;
+// });
+
+// console.table(sortedByBestPlayers);
+
+// const sortedByWorstPlayers = players.toSorted((prevEl, nextEl) => {
+//   return prevEl.timePlayed - nextEl.timePlayed;
+// });
+
+// console.table(sortedByWorstPlayers);
+
+// TODO: За іменем
+// const sortedByName = players.toSorted((prevEl, nextEl) => {
+//   return prevEl.name.localeCompare(nextEl.name);
+// });
+
+// console.table(sortedByName);
