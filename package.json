@@ -1,0 +1,21 @@
+{
+  "name": "bootcamp-82-js",
+  "version": "1.0.0",
+  "description": "1. Пограємо в Kahoot і обговоримо питання",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Olexiy-repin/bootcamp-82-JS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Olexiy-repin/bootcamp-82-JS/issues"
+  },
+  "homepage": "https://github.com/Olexiy-repin/bootcamp-82-JS#readme"
+}
