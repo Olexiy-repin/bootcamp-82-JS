@@ -1,22 +1,23 @@
 {
-  "name": "bootcamp-82-js",
-  "version": "1.0.1",
-  "description": "1. Пограємо в Kahoot і обговоримо питання",
-  "main": "main.js",
+  "name": "vanilla-app-template",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "push": "git add .; git commit -m 'update'; git push"
+    "dev": "vite",
+    "build": "vite build --base=/npm-homework/",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Olexiy-repin/bootcamp-82-JS.git"
+  "devDependencies": {
+    "glob": "^11.0.0",
+    "postcss": "^8.4.41",
+    "postcss-sort-media-queries": "^5.2.0",
+    "vite": "^5.4.6"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Alexander Repeta <alexander.repeta@gmail.com>",
   "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/Olexiy-repin/bootcamp-82-JS/issues"
-  },
-  "homepage": "https://github.com/Olexiy-repin/bootcamp-82-JS#readme"
+  "dependencies": {
+    "vite-plugin-full-reload": "^1.2.0",
+    "vite-plugin-html-inject": "^1.1.2"
+  }
 }
