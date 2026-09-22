@@ -1,6 +1,6 @@
 {
   "name": "bootcamp-82-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "1. Пограємо в Kahoot і обговоримо питання",
   "main": "main.js",
   "scripts": {
