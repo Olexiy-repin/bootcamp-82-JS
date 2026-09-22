@@ -1,9 +1,16 @@
 /**
+ * JSON формат
+ */
+
+//!=========================================
+
+//!=========================================
+/**
  * LocalStorage
  */
 
-const LS_KEY = "Array of names";
-const names = ["Alice", "Kate", "Emma"];
+const LS_KEY = 'Array of names';
+const names = ['Alice', 'Kate', 'Emma'];
 
 /**
  * Збереження
