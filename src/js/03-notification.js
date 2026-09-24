@@ -5,19 +5,37 @@
  * - Не забуваємо чистити таймер
  */
 
-const NOTIFICATION_DELAY = 3000;
-let timeoutId = null;
-const notification = document.querySelector(".js-alert");
+//!=========================================
+// const notificationElem = document.querySelector('.js-alert');
+// const NOTIFICATION_DELAY = 3000;
+// const NOTIFICATION_CLOSE_DELAY = 5000;
+// let TIMEOUT_ID;
 
-/*
- * Функції
- */
-function onNotificationClick() {}
+// console.log('Запланувати відкриття через 3 секунди');
+// setTimeout(() => {
+//   showNotification();
+// }, NOTIFICATION_DELAY);
 
-function showNotification() {
-  console.log(
-    "Закриваємо сповіщення автоматично, щоб воно не залишалося відкритим"
-  );
-}
+// notificationElem.addEventListener('click', () => {
+//   hideNotification();
+// });
 
-function hideNotification() {}
+//!=========================================
+
+// function showNotification() {
+//   console.log('SHOW');
+//   notificationElem.classList.add('is-visible');
+
+//   console.log('Запланувати закриття через 5 секунд');
+//   TIMEOUT_ID = setTimeout(() => {
+//     hideNotification();
+//   }, NOTIFICATION_CLOSE_DELAY);
+// }
+
+// function hideNotification() {
+//   console.log('HIDE');
+//   notificationElem.classList.remove('is-visible');
+//   clearTimeout(TIMEOUT_ID);
+// }
+
+//!=========================================
