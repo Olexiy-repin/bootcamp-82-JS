@@ -1,0 +1,59 @@
+<div class="block">
+  <form class="form-inline search-form js-location-form">
+    <div class="form-group m-2">
+      <input
+        type="text"
+        class="form-control"
+        name="userip"
+        placeholder="Enter IP"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Get Info</button>
+  </form>
+
+  <div class="info-card js-ip-form">
+    <div class="info-item">
+      <img
+        class="flag"
+        src="https://flagsapi.com/UA/flat/64.png"
+        alt="Flag of Ukraine"
+      />
+    </div>
+    <div class="info-item">
+      <span class="info-label">Country:</span>
+      <span class="info-value">Ukraine</span>
+    </div>
+
+    <div class="info-item">
+      <span class="info-label">IP Address:</span>
+      <span class="info-value">192.168.5.5</span>
+    </div>
+
+    <div class="info-item">
+      <span class="info-label">City:</span>
+      <span class="info-value">Lviv</span>
+    </div>
+
+    <div class="info-item">
+      <span class="info-label">Timezone:</span>
+      <span class="info-value">+2</span>
+    </div>
+
+    <div class="info-item">
+      <span class="info-label">Currency:</span>
+      <span class="info-value">UAH</span>
+    </div>
+
+    <div class="info-item">
+      <span class="info-label">ISP:</span>
+      <span class="info-value">0000</span>
+    </div>
+
+    <div class="info-item">
+      <span class="info-label">Google Maps:</span>
+      <a href="https://www.google.com/maps/@${lat},${lon},13z" target="_blank">
+        <span class="info-value">Тицяй</span>
+      </a>
+    </div>
+  </div>
+</div>
