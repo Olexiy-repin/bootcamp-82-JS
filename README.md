@@ -1,7 +1,22 @@
-## [Частина 1 (теорія)](https://docs.google.com/presentation/d/1xbFM4RwlP1hRSYaH2C4zIVvIO6x51NcnFBnjjpQvQzA/edit#slide=id.p)
+# ПЛАН
 
-## PLAN
+- Postman
+- Робота з приватним API
+  - **C**reate
+    - Метод POST
+    - Тіло
+    - Заголовки
+    - Відповідь
+  - **R**ead
+    - Метод GET
+    - Відповідь
+  - **U**pdate
+    - Методи PUT та PATCH
+    - Тіло
+    - Заголовки
+    - Відповідь
+  - **D**elete
+    - Метод DELETE
+    - Відповідь
 
-1. NETWORK
-1. FETCH
-1. PRACTICE
+---
