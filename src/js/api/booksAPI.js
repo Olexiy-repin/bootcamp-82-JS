@@ -1,45 +1,32 @@
 import axios from 'axios';
 
 axios.defaults.baseURL =
-  'https://q10gsl5s9d.execute-api.us-east-1.amazonaws.com/public';
+  'https://q10gsl5s9d.execute-api.us-east-1.amazonaws.com';
+
+//!=========================================
 
 export const getBookList = () => {
-  return axios.get('/books').then(res => res.data);
+  return axios.get('/public/books');
 };
 
-export const getBookById = id => {
-  return axios.get(`/books/${id}`).then(res => res.data);
+export const getBookById = bookId => {
+  return axios.get(`/public/books/${bookId}`);
 };
 
-export const createBook = body => {
-  return axios.post('/books', body).then(res => res.data);
+export const createBook = newBookBody => {
+  return axios.post('/public/book', newBookBody);
 };
 
-export const updateBook = (id, body) => {
-  return axios.patch(`/books/${id}`, body).then(res => res.data);
+export const replaceBook = (bookId, body) => {
+  return axios.put(`/public/books/${bookId}`, body);
 };
 
-export const resetBook = (id, body) => {
-  return axios.put(`/books/${id}`, body).then(res => res.data);
+export const updateBook = (bookId, body) => {
+  return axios.patch(`/public/books/${bookId}`, body);
 };
 
-export const deleteBook = id => {
-  return axios.delete(`/books/${id}`);
+export const deleteBook = bookId => {
+  return axios.delete(`/public/books/${bookId}`);
 };
 
 //!=========================================
-// export const createBook = body => {
-//   const BASE_URL = '';
-//   const END_POINT = '';
-//   const url = BASE_URL + END_POINT;
-
-//   const options = {
-//     method: 'POST',
-//     body: JSON.stringify(body),
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   };
-
-//   return fetch(url, options).then(res => res.json());
-// };

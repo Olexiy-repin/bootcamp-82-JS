@@ -1,10 +1,13 @@
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+
 import {
   createBook,
   deleteBook,
   getBookList,
-  resetBook,
+  replaceBook,
   updateBook,
-} from './api/booksAPI.js';
+} from './api/booksAPI';
 
 //!=========================================
 
@@ -13,95 +16,146 @@ const refs = {
   createForm: document.querySelector('.js-create-form'),
   resetForm: document.querySelector('.js-reset-form'),
   updateForm: document.querySelector('.js-update-form'),
+  loadingElem: document.querySelector('.js-loading'),
 };
 
 //!=========================================
 
-document.addEventListener('DOMContentLoaded', () => {
-  getBookList().then(data => {
-    const markup = booksTemplate(data.items);
-    refs.container.innerHTML = markup;
-  });
-});
+document.addEventListener('DOMContentLoaded', handleDOMLoaded);
+refs.createForm.addEventListener('submit', handleCreateBook);
+refs.resetForm.addEventListener('submit', handleResetBook);
+refs.updateForm.addEventListener('submit', handleUpdateBook);
+refs.container.addEventListener('click', handleDeleteBook);
 
 //!=========================================
-refs.createForm.addEventListener('submit', handleBookCreate);
-refs.updateForm.addEventListener('submit', handleBookUpdate);
-refs.resetForm.addEventListener('submit', handleBookReset);
-refs.container.addEventListener('click', handleBookDelete);
 
-function handleBookCreate(e) {
+function handleDOMLoaded() {
+  showLoader();
+
+  getBookList()
+    .then(response => {
+      const { data } = response;
+      const books = data.items;
+      const markup = booksTemplate(books);
+      refs.container.innerHTML = markup;
+    })
+    .catch(err => {
+      showError(err);
+    })
+    .finally(() => {
+      hideLoader();
+    });
+}
+
+function handleCreateBook(e) {
   e.preventDefault();
-  const formData = new FormData(e.target);
+  const borys = new FormData(e.target);
 
-  const newBookData = {
-    title: formData.get('title'),
-    author: formData.get('author'),
-    desc: formData.get('desc'),
+  const body = {
+    title: borys.get('title'),
+    author: borys.get('author'),
+    desc: borys.get('desc'),
   };
 
-  createBook(newBookData).then(res => {
-    const markup = bookTemplate(res);
-    refs.container.insertAdjacentHTML('afterbegin', markup);
-  });
+  showLoader();
+  createBook(body)
+    .then(response => {
+      const { data } = response;
+      const markup = bookTemplate(data);
+      refs.container.insertAdjacentHTML('afterbegin', markup);
+    })
+    .catch(err => {
+      showError(err);
+    })
+    .finally(() => {
+      hideLoader();
+    });
 
   e.target.reset();
 }
 
-function handleBookUpdate(e) {
+function handleResetBook(e) {
   e.preventDefault();
+
   const formData = new FormData(e.target);
 
-  const id = formData.get('bookId');
-
-  const bookData = {
+  const bookId = formData.get('bookId');
+  const body = {
     title: formData.get('title'),
     author: formData.get('author'),
     desc: formData.get('desc'),
   };
 
-  updateBook(id, bookData).then(newBook => {
-    const oldElem = document.querySelector(`[data-id="${id}"]`);
-    const markup = bookTemplate(newBook);
-    oldElem.outerHTML = markup;
-  });
-}
+  showLoader();
+  replaceBook(bookId, body)
+    .then(res => {
+      const { data } = res;
+      const markup = bookTemplate(data);
 
-function handleBookReset(e) {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-
-  const id = formData.get('bookId');
-
-  const bookData = {
-    title: formData.get('title'),
-    author: formData.get('author'),
-    desc: formData.get('desc'),
-  };
-
-  resetBook(id, bookData)
-    .then(newBook => {
-      const oldElem = document.querySelector(`[data-id="${id}"]`);
-      const markup = bookTemplate(newBook);
+      const oldElem = refs.container.querySelector(`[data-id="${bookId}"]`);
       oldElem.outerHTML = markup;
     })
     .catch(err => {
-      console.log('err', err);
+      showError(err);
+    })
+    .finally(() => {
+      hideLoader();
     });
+
+  e.target.reset();
 }
 
-function handleBookDelete(e) {
+function handleUpdateBook(e) {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const bookId = formData.get('bookId');
+
+  const body = {
+    title: formData.get('title') || undefined,
+    author: formData.get('author') || undefined,
+    desc: formData.get('desc') || undefined,
+  };
+
+  showLoader();
+  updateBook(bookId, body)
+    .then(response => {
+      const { data } = response;
+      const markup = bookTemplate(data);
+
+      const oldElem = refs.container.querySelector(`[data-id="${bookId}"]`);
+      oldElem.outerHTML = markup;
+    })
+    .catch(err => {
+      showError(err);
+    })
+    .finally(() => {
+      hideLoader();
+    });
+
+  e.target.reset();
+}
+
+function handleDeleteBook(e) {
   if (!e.target.classList.contains('book-delete-button')) {
     return;
   }
-  const id = e.target.dataset.id;
 
-  deleteBook(id).then(() => {
-    const liElem = e.target.closest('li');
-    liElem.remove();
-  });
+  const bookId = e.target.dataset.id;
+  showLoader();
+
+  deleteBook(bookId)
+    .then(() => {
+      const oldElem = refs.container.querySelector(`[data-id="${bookId}"]`);
+      oldElem.remove();
+    })
+    .catch(err => {
+      showError(err);
+    })
+    .finally(() => {
+      hideLoader();
+    });
 }
-
 //!=========================================
 
 function bookTemplate(book) {
@@ -125,6 +179,22 @@ function bookTemplate(book) {
 }
 
 function booksTemplate(books) {
-  return books.map(bookTemplate).join('');
+  return books.map(bookTemplate).join('\n\n\n');
 }
 //!=========================================
+
+function showError(message) {
+  console.log(message);
+  iziToast.error({
+    title: 'Request Error',
+    message: message,
+  });
+}
+
+function showLoader() {
+  refs.loadingElem.classList.remove('hidden');
+}
+
+function hideLoader() {
+  refs.loadingElem.classList.add('hidden');
+}
