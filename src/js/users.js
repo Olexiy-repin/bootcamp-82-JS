@@ -1,10 +1,5 @@
-import {
-  deleteUser,
-  getUsers,
-  resetUser,
-  updateUser,
-} from './modules/usersAPI';
-import { createUser } from './modules/usersAPI';
+import { deleteUser, getUsers, resetUser, updateUser } from './api/usersAPI';
+import { createUser } from './api/usersAPI';
 
 // ===================================================
 const refs = {
