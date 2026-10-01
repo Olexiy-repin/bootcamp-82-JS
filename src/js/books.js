@@ -29,25 +29,16 @@ refs.container.addEventListener('click', handleDeleteBook);
 
 //!=========================================
 
-function handleDOMLoaded() {
+async function handleDOMLoaded() {
   showLoader();
 
-  getBookList()
-    .then(response => {
-      const { data } = response;
-      const books = data.items;
-      const markup = booksTemplate(books);
-      refs.container.innerHTML = markup;
-    })
-    .catch(err => {
-      showError(err);
-    })
-    .finally(() => {
-      hideLoader();
-    });
+  const data = await getBookList();
+  const books = data.items;
+  const markup = booksTemplate(books);
+  refs.container.innerHTML = markup;
 }
 
-function handleCreateBook(e) {
+async function handleCreateBook(e) {
   e.preventDefault();
   const borys = new FormData(e.target);
 
@@ -58,23 +49,20 @@ function handleCreateBook(e) {
   };
 
   showLoader();
-  createBook(body)
-    .then(response => {
-      const { data } = response;
-      const markup = bookTemplate(data);
-      refs.container.insertAdjacentHTML('afterbegin', markup);
-    })
-    .catch(err => {
-      showError(err);
-    })
-    .finally(() => {
-      hideLoader();
-    });
 
+  try {
+    const data = await createBook(body);
+    const markup = bookTemplate(data);
+    refs.container.insertAdjacentHTML('afterbegin', markup);
+  } catch {
+    showError(err);
+  }
+
+  hideLoader();
   e.target.reset();
 }
 
-function handleResetBook(e) {
+async function handleResetBook(e) {
   e.preventDefault();
 
   const formData = new FormData(e.target);
@@ -87,25 +75,21 @@ function handleResetBook(e) {
   };
 
   showLoader();
-  replaceBook(bookId, body)
-    .then(res => {
-      const { data } = res;
-      const markup = bookTemplate(data);
 
-      const oldElem = refs.container.querySelector(`[data-id="${bookId}"]`);
-      oldElem.outerHTML = markup;
-    })
-    .catch(err => {
-      showError(err);
-    })
-    .finally(() => {
-      hideLoader();
-    });
+  try {
+    const data = await replaceBook(bookId, body);
+    const markup = bookTemplate(data);
+    const oldElem = refs.container.querySelector(`[data-id="${bookId}"]`);
+    oldElem.outerHTML = markup;
+  } catch {
+    showError(err);
+  }
 
+  hideLoader();
   e.target.reset();
 }
 
-function handleUpdateBook(e) {
+async function handleUpdateBook(e) {
   e.preventDefault();
 
   const formData = new FormData(e.target);
@@ -118,25 +102,22 @@ function handleUpdateBook(e) {
   };
 
   showLoader();
-  updateBook(bookId, body)
-    .then(response => {
-      const { data } = response;
-      const markup = bookTemplate(data);
 
-      const oldElem = refs.container.querySelector(`[data-id="${bookId}"]`);
-      oldElem.outerHTML = markup;
-    })
-    .catch(err => {
-      showError(err);
-    })
-    .finally(() => {
-      hideLoader();
-    });
+  try {
+    const data = await updateBook(bookId, body);
+    const markup = bookTemplate(data);
+    const oldElem = refs.container.querySelector(`[data-id="${bookId}"]`);
+    oldElem.outerHTML = markup;
+  } catch {
+    showError(err);
+  }
+
+  hideLoader();
 
   e.target.reset();
 }
 
-function handleDeleteBook(e) {
+async function handleDeleteBook(e) {
   if (!e.target.classList.contains('book-delete-button')) {
     return;
   }
@@ -144,17 +125,15 @@ function handleDeleteBook(e) {
   const bookId = e.target.dataset.id;
   showLoader();
 
-  deleteBook(bookId)
-    .then(() => {
-      const oldElem = refs.container.querySelector(`[data-id="${bookId}"]`);
-      oldElem.remove();
-    })
-    .catch(err => {
-      showError(err);
-    })
-    .finally(() => {
-      hideLoader();
-    });
+  try {
+    await deleteBook(bookId);
+    const oldElem = refs.container.querySelector(`[data-id="${bookId}"]`);
+    oldElem.remove();
+  } catch {
+    showError(err);
+  }
+
+  hideLoader();
 }
 //!=========================================
 

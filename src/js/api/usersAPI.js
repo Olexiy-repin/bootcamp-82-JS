@@ -1,63 +1,47 @@
-export function getUsers() {
-  const BASE_URL = 'http://localhost:3000';
-  const END_POINT = '/users';
-  const url = `${BASE_URL}${END_POINT}`;
-  return fetch(url).then(res => res.json());
-}
+import axios from 'axios';
 
-export function createUser(user) {
-  const BASE_URL = 'http://localhost:3000';
-  const END_POINT = '/users';
-  const url = `${BASE_URL}${END_POINT}`;
+axios.defaults.baseURL =
+  'https://q10gsl5s9d.execute-api.us-east-1.amazonaws.com';
 
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user),
-  };
+export const getStudents = async params => {
+  const res = await axios.get('/public/students', {
+    params,
+  });
 
-  return fetch(url, options).then(res => res.json());
-}
-export function updateUser({ id, ...user }) {
-  const BASE_URL = 'http://localhost:3000';
-  const END_POINT = '/users';
-  const url = `${BASE_URL}${END_POINT}/${id}`;
+  return res.data;
+};
 
-  const options = {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user),
-  };
+export const createStudent = async newStudent => {
+  const res = await axios.post('/public/students', newStudent);
+  return res.data;
+};
+export const getStudentById = async studentId => {
+  const res = await axios.get(`/public/students/${studentId}`);
+  return res.data;
+};
+export const replaceStudent = async (studentId, newStudent) => {
+  const res = await axios.put(`/public/students/${studentId}`, newStudent);
+  return res.data;
+};
+export const updateStudent = async (studentId, newStudent) => {
+  const res = await axios.patch(`/public/students/${studentId}`, newStudent);
+  return res.data;
+};
+export const deleteStudent = async studentId => {
+  const res = await axios.delete(`/public/students/${studentId}`);
+  return res.data;
+};
 
-  return fetch(url, options).then(res => res.json());
-}
-export function resetUser({ id, ...user }) {
-  const BASE_URL = 'http://localhost:3000';
-  const END_POINT = '/users';
-  const url = `${BASE_URL}${END_POINT}/${id}`;
+//!=========================================
 
-  const options = {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user),
-  };
+// console.log('START1');
+// console.log('START2');
+// console.log('START3');
 
-  return fetch(url, options).then(res => res.json());
-}
-export function deleteUser(id) {
-  const BASE_URL = 'http://localhost:3000';
-  const END_POINT = '/users';
-  const url = `${BASE_URL}${END_POINT}/${id}`;
+// const res = getStudents();
 
-  const options = {
-    method: 'DELETE',
-  };
+// console.log('END1');
+// console.log('END2');
+// console.log('END3');
 
-  return fetch(url, options).then(res => res.json());
-}
+//!=========================================
