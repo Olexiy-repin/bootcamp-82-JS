@@ -1,31 +1,65 @@
-```html
-<li class="book-item card">
+`
+
+<li class="card news-card">
+        <img loading="lazy"
+          class="news-image"
+          src="${urlToImage}"
+          alt="${title}"
+        />
+        <h3 class="card-title">
+          ${title}
+        </h3>
+        <p class="card-desc">
+        ${description}
+        </p>
+        <div class="card-footer">
+          <span>${author}</span>
+          <span>${publishedAt}</span>
+        </div>
+      </li>
+`
+
+`
+
+<li class="card news-card">
+          <img loading="lazy"
+            class="news-image"
+            src="${media}"
+            alt="${title}"
+          />
+          <h3 class="card-title">
+            ${title}
+          </h3>
+          <p class="card-desc">
+          ${summary}
+          </p>
+          <div class="card-footer">
+            <span>${author}</span>
+            <span>${published_date}</span>
+          </div>
+        </li>
+`
+
+`
+
+<li class="card pokemon">
   <img
-    class="book-img"
-    src="https://source.unsplash.com/1280x720/?random=431&book"
-    alt=""
+    class="pokemon-img"
+    src="${sprites.front_default}"
+    alt="#"
   />
-  <h5 class="book-title">ab corrupti officia</h5>
-  <h6>Author: Mariya</h6>
-  <p class="book-desc">
-    Eos harum voluptatem possimus perferendis earum eos similique et. Deserunt
-    consequuntur et autem commodi iste aut sed omnis. Est deserunt facilis
-    voluptas sit dignissimos.
-  </p>
-
-  <div class="book-info">
-    <span>Price: 6</span>
-    <span>Rating: 705</span>
+  <div class="pokemon-header">
+    <h4 class="pokemon-title">${name}</h4>
+    <span class="pokemon-id">#${(id + '').padStart(5, '0')}</span>
   </div>
-</li>
-```
 
-```html
-<li class="card user-item" data-id="${id}">
-  <img src="${img}" alt="#" class="user-avatar" />
-  <h3 class="user-title">${name}</h3>
-  <p>Phone: ${email}</p>
-  <p>Email: ${phone}</p>
-  <button class="btn button">DELETE</button>
+  <div class="pokemon-desc">
+    <span>Weight: ${weight}</span>
+    <span>Height: ${height}</span>
+    <span>Experience: ${base_experience}</span>
+    <span>Order: ${order}</span>
+  </div>
+
+  <div class="pokemon-footer"></div>
 </li>
-```
+`
